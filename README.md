@@ -16,7 +16,7 @@
 
 
 # how to use
-1. create a text file
+1. create a text file (in this way that it can be archived and use later in case its ruined bcus of the mods)
 2. the language is pretty simple tbh its kinda like
 ```
 osufile=[path_to_your_osu_file]
