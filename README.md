@@ -23,10 +23,15 @@ osufile=[path_to_your_osu_file]
 
 ---
 
-**the default paremeters are**
-1. Colorhax `colorhax=[starttime],[endtime],[colorhax pattern]`
-2. Colorburst `colorburst=[starttime],[endtime],[colorhax pattern],[beatsnap (e.g. 6 | using 1/6 will encounter errors.)]`
-3. Bookmarkhax `colorhax=[colorhax pattern]`
+  **the default paremeters are**
+  1. Colorhax `colorhax=[starttime],[endtime],[colorhax pattern]`
+  2. Colorburst `colorburst=[starttime],[endtime],[colorhax pattern],[beatsnap (e.g. 6 | using 1/6 will encounter errors.)]`
+  3. Bookmarkhax `colorhax=[colorhax pattern]`
 
+# to run the file on terminal
+Python Build : ` py main.py [colorhax data file]`
+
+Executable Build : ` main.exe [colorhax data file]`
+ 
 ---
 if anyone has any question or feedback pls just dm me at ohm002#8123 i'm so lonely TY 
