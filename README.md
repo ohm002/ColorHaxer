@@ -53,4 +53,4 @@ if anyone has any question or feedback pls just dm me at ohm002#8123 i'm so lone
 probably coming soon
 
 - [ ] using opencv to decode the screenshot from olibomby's color manager to the colorhax file
-- [ ] colorhax an object with a specified sb
+- [ ] colorhax an object with a specified sv
