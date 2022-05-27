@@ -23,7 +23,7 @@ osufile=[path_to_your_osu_file]
 
 [scriptname]=[parameters (naturally separated with,)]
 ```
-3. for the starttime and endtime leave the parameters with "-" and the default value will be the start/end of the map
+3. for the starttime and endtime leave the parameters with "-" and the default value will be the start/end of the map, can use the milliseconds or in the 00:00:000 format
 4. for the colorhax pattern, indefault it will be separate with "/" e,g, "1/8/3" (for the funny using the same color in the section works somehow LOL)
 
 
