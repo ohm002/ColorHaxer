@@ -104,6 +104,7 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 	oldprint = oosufile
 	timing = ParseMap.ParseAllBeatmapData(osufile).timingpoints
 	parsed = ParseMap.ParseAllBeatmapData(osufile).hitobjects
+	difficulty = ParseMap.ParseAllBeatmapData(osufile).difficulty
 	for line in timing:
 		if re.split(",", line)[0] > stime:
 			if re.split(",", line)[6] == "1":
@@ -124,7 +125,16 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 					for line2 in parsed:
 							rawsplitted2 = re.split(",", line2)
 							if (rawsplitted2[2] > burststart):
+								basesv = double(difficulty[4].split(":")[1])
+								svmul = None
+								for line in timing:
+									if int(line[0]) > burststart:
+										svmul = int(line[0])
+										break
+								svmuld = basesv * svmul
 								if (round(bpm / (int(rawsplitted2[2]) - (int(burstend)))) == snap):
+									burstend = rawsplitted2[2]
+								elif (round(svmuld/snap) == round(double(rawsplitted2[7]))):
 									burstend = rawsplitted2[2]
 								else: 
 									break
