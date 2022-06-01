@@ -115,8 +115,16 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 	burstend = None
 	for line in parsed:
 		rawsplitted = re.split(",", line)
+		\\ basesv = double(difficulty[4].split(":")[1])
+		\\ svmul = None
+		\\ for line in timing:
+		\\ 	if int(line[0]) > burststart:
+		\\		svmul = int(line[0])
+		\\		break
+		\\svmuld = basesv * svmul
 		if burstend == None and burststart == None:
 			if (round(bpm / (int(rawsplitted[2]) - int(re.split(",", parsed[depth-1])[2]))) == snap):
+			\\ if (round(bpm / (int(rawsplitted[2]) - int(re.split(",", parsed[depth-1])[2]))) == snap or round(svmuld/snap) == round(double(rawsplitted[7])))):
 				splitteddigit = rawsplitted[3]
 				splitted = f'{int(splitteddigit):08b}'
 				if (splitted[6] == "0"):
@@ -125,17 +133,17 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 					for line2 in parsed:
 							rawsplitted2 = re.split(",", line2)
 							if (rawsplitted2[2] > burststart):
-								basesv = double(difficulty[4].split(":")[1])
-								svmul = None
-								for line in timing:
-									if int(line[0]) > burststart:
-										svmul = int(line[0])
-										break
-								svmuld = basesv * svmul
+								\\ basesv = double(difficulty[4].split(":")[1])
+								\\ svmul = None
+								\\ for line in timing:
+								\\ 	if int(line[0]) > burststart:
+								\\		svmul = int(line[0])
+								\\		break
+								\\svmuld = basesv * svmul
 								if (round(bpm / (int(rawsplitted2[2]) - (int(burstend)))) == snap):
 									burstend = rawsplitted2[2]
-								elif (round(svmuld/snap) == round(double(rawsplitted2[7]))):
-									burstend = rawsplitted2[2]
+								\\ elif (round(svmuld/snap) == round(double(rawsplitted2[7]))):
+								\\	burstend = rawsplitted2[2]
 								else: 
 									break
 		else:
