@@ -114,15 +114,15 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 	burststart = None
 	burstend = None
 	for line in parsed:
-		rawsplitted = re.split(",", line)
-		basesv = double(difficulty[4].split(":")[1])
-		svmul = None
-		for line in timing:
-			if int(line[0]) > burststart:
-				svmul = int(line[0])
-				break
-		svmuld = basesv * svmul
 		if burstend == None and burststart == None:
+			rawsplitted = re.split(",", line)
+			basesv = double(difficulty[4].split(":")[1])
+			svmul = None
+			for line in timing:
+				if int(line[0]) > burststart:
+					svmul = int(line[0])
+					break
+			svmuld = basesv * svmul
 			if (round(bpm / (int(rawsplitted[2]) - int(re.split(",", parsed[depth-1])[2]))) == snap):
 				splitteddigit = rawsplitted[3]
 				splitted = f'{int(splitteddigit):08b}'
