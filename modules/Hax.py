@@ -114,8 +114,8 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 	burststart = None
 	burstend = None
 	for line in parsed:
+		rawsplitted = re.split(",", line)
 		if burstend == None and burststart == None:
-			rawsplitted = re.split(",", line)
 			basesv = double(difficulty[4].split(":")[1])
 			svmul = None
 			for line in timing:
