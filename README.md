@@ -6,9 +6,13 @@
 3. Bookmarkhax : Swap colorhaxs using bookmarks `colorhax=[colorhax pattern]`
 
 ### reminder for you
-* colorburst is not finished, the part where it calculates the slider length is WIP
 * the code is a spaghetti for sure so any good developers out there *PLEASE* roast my code in the issues tab u can call me yandev whatever
-* if u wanna make a custom script (cus there are only 3 script with 1 wip LOL) then u can download python and download the source code instead
+* if u wanna make a custom script (cus there are only 3 script LOL) then maybe just edit the Hax.py where bunch of spaghetties are in there so have fun
+  * the default osuparse script are 
+     ```Hax.isslider(LIST of parameters in that line) 
+        Parse.AssembleBeatmapData(STRING of .osu file || OsuMap class object)
+        Parse.ParseAllBeatmapData(STRING of .osu file) || will return an OsuMap class object
+     ```
   * and everything kinda just works on 
   ``` 
   if the objects kinda match the conditions then run the default colorhax command for this
