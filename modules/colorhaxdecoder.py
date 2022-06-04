@@ -27,6 +27,8 @@ def ParseHax(haxfile):
 		elif line.startswith("osufile"):
 			osufile = (line.split("=")[1])	
 			path = pathparse(osufile)
+			print(f"LOG : Initialized osu! File = \""+ osufile.split('\\')[-1] + "\"")
+			print()
 			osufile = open(osufile, encoding="utf-8").read()
 			continue
 		elif line == "":
@@ -49,6 +51,7 @@ def ParseHax(haxfile):
 					toprint = Hax.bookmarkhax(toprint, li[0])
 				else:
 					toprint = Hax.bookmarkhax(osufile, li[0])
+			print(f"LOG : Succesfully Executed Script #{script + 1} ({line.split('=')[0].upper()})")
 			script += 1
 	mapdata = ParseMap.ParseAllBeatmapData(toprint.splitlines())
 	pstr = ""

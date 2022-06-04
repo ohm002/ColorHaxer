@@ -2,6 +2,11 @@ from modules import ParseMap
 import numpy
 import re
 
+def isslider(txt):
+	c = txt[3]
+	splitted = f'{int(c):08b}'
+	return splitted[6] == "1" and splitted[7] == "0"
+
 def colorhax(rosufile, stime, etime, patternf):
 	toprint = ""
 	osufile = rosufile.splitlines()
@@ -105,46 +110,60 @@ def colorburst(rosufile, stime, etime, patternf, snap):
 	timing = ParseMap.ParseAllBeatmapData(osufile).timingpoints
 	parsed = ParseMap.ParseAllBeatmapData(osufile).hitobjects
 	difficulty = ParseMap.ParseAllBeatmapData(osufile).difficulty
+	if stime == "-":
+		stime = int(parsed[0].split(",")[2])
+	elif ":" in str(stime):
+		stime = int(stime.split(":")[0]) * 60*1000 + int(stime.split(":")[1])*1000 + int(stime.split(":")[2])
+	else:
+		stime = int(stime)
+	if etime == "-":
+		etime = int(parsed[len(parsed)-1].split(",")[2])
+	elif ":" in str(etime):
+		etime = int(etime.split(":")[0]) * 60*1000 + int(etime.split(":")[1])*1000 + int(etime.split(":")[2])
+	else:
+		etime = int(etime)
 	for line in timing:
-		if re.split(",", line)[0] > stime:
-			if re.split(",", line)[6] == "1":
-				bpm = round(float(re.split(",", line)[1]))
-				break
+		if re.split(",", line)[6] == "1":
+			bpm = round(float(re.split(",", line)[1]))
+		elif int(re.split(",", line)[0]) > stime:
+			break
 	depth = 0
 	burststart = None
 	burstend = None
+	svmul = 1
 	for line in parsed:
-		rawsplitted = re.split(",", line)
-		if burstend == None and burststart == None:
-			basesv = double(difficulty[4].split(":")[1])
-			svmul = None
-			for line in timing:
-				if int(line[0]) > burststart:
-					svmul = int(line[0])
+		if etime >= int(line.split(",")[2]) >= stime:
+			basesv = float(difficulty[4].split(":")[1])
+			for l in timing:
+				if int(l.split(",")[0]) > int(line.split(",")[2]):
+					svmul = int(l[0])
 					break
-			svmuld = basesv * svmul
-			if (round(bpm / (int(rawsplitted[2]) - int(re.split(",", parsed[depth-1])[2]))) == snap):
-				splitteddigit = rawsplitted[3]
-				splitted = f'{int(splitteddigit):08b}'
-				if (splitted[6] == "0"):
-					burststart = re.split(",", parsed[depth-1])[2]
-					burstend = int(burststart)
-					for line2 in parsed:
-							rawsplitted2 = re.split(",", line2)
-							if (rawsplitted2[2] > burststart):
-								if (round(bpm / (int(rawsplitted2[2]) - (int(burstend)))) == snap):
-									burstend = rawsplitted2[2]
-								else: 
-									break
-			elif (round(svmuld/snap) == round(double(rawsplitted[7])))):
-				burststart = rawsplitted[2]
-				burstend = rawsplitted[3]
-				break
-		else:
-			toprint = colorhax(oldprint, int(burststart), int(burstend), patternf)
-			burststart = None
-			burstend = None
-		depth += 1
+			rawsplitted = re.split(",", line)
+			if burstend == None and burststart == None:
+				svmuld = basesv * svmul * 100
+				if (round(bpm / (int(rawsplitted[2]) - int(re.split(",", parsed[depth-1])[2]))) == snap):
+					splitteddigit = rawsplitted[3]
+					splitted = f'{int(splitteddigit):08b}'
+					if (splitted[6] == "0"):
+						burststart = re.split(",", parsed[depth-1])[2]
+						burstend = int(burststart)
+						for line2 in parsed:
+								rawsplitted2 = re.split(",", line2)
+								if (rawsplitted2[2] > burststart):
+									if (round(bpm / (int(rawsplitted2[2]) - (int(burstend)))) == snap):
+										burstend = rawsplitted2[2]
+									else: 
+										break
+			else:
+				oldprint = colorhax(oldprint, int(burststart), int(burstend), patternf)
+				burststart = None
+				burstend = None
+			if isslider(rawsplitted):
+					if (round(svmuld/snap) == round(float(rawsplitted[7]))):
+						burststart = rawsplitted[2]
+						burstend = rawsplitted[2]
+						oldprint = colorhax(oldprint, int(burststart), int(burstend), patternf)
+			depth += 1
 	return oldprint
 
 
