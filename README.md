@@ -5,6 +5,8 @@
 2. Colorburst : Colorhaxs the specific pattern with a specified beat snap `colorburst=[starttime],[endtime],[colorhax pattern],[beatsnap (e.g. 6 | using 1/6 will encounter errors.)]`
 3. Bookmarkhax : Swap colorhaxs using bookmarks `colorhax=[colorhax pattern]`
 
+[wiki](https://github.com/ohm002/ColorHaxer/wiki)
+
 ### reminder for you
 * the code is a spaghetti for sure so any good developers out there *PLEASE* roast my code in the issues tab u can call me yandev whatever
 * if u wanna make a custom script (cus there are only 3 script LOL) then maybe just edit the Hax.py where bunch of spaghetties are in there so have fun
