@@ -5,6 +5,8 @@ import re
 import shutil
 from modules import Class, Hax, ParseMap
 
+# a test if this will commit to the githuv wev
+
 def pathparse(text):
 	return [[i for i in text.split("\\") if i != text.split("\\")[-1]], text.split("\\")[-1]]
 
